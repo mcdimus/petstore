@@ -1,0 +1,33 @@
+<table class="ui compact selectable celled table">
+	<thead>
+	<tr>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Birth Date</th>
+		<th style="text-align:center;">Action</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr *ngFor="let pet of pets" (click)="viewPetInfoClick(pet)">
+		<td>{{pet.name}}</td>
+		<td>{{pet.petType}}</td>
+		<td>{{pet.birthDate | date:'medium'}}</td>
+		<td style="text-align: center;"><i class="clickable ui trash icon" (click)="onPetRemoveClick($event, pet.petId)"></i></td>
+	</tr>
+	</tbody>
+	<tfoot class="full-width">
+		<tr>
+			<th colspan="4" style="padding: 6px 10px;">
+				<div class="ui left floated mini action input">
+					<input type="text" placeholder="Find Pet By ID..." [(ngModel)]="petSearchId">
+					<button class="ui icon button" (click)="onPetSearchByIdClick($event)">
+						<i class="search icon"></i>
+					</button>
+				</div>
+				<button class="ui right floated small primary labeled icon button" (click)="onPetAddTriggerClick()">
+					<i class="plus icon"></i> Add Pet
+				</button>
+			</th>
+		</tr>
+	</tfoot>
+</table>

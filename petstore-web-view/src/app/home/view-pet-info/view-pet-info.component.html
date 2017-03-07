@@ -1,0 +1,20 @@
+<div class="ui small modal" id="view-pet-modal">
+	<i class="close icon"></i>
+	<div class="header">Pet Details</div>
+	<div class="content" style="width: 50%; margin: auto;">
+		<div class="ui card">
+			<div class="image">
+				<img src="{{petTypeImageSrc}}">
+			</div>
+			<div class="content">
+				<a class="header">{{pet?.name}}</a>
+				<div class="meta">
+					<span class="date">Born {{pet?.birthDate | date:'short'}}</span>
+				</div>
+			</div>
+			<div class="extra content">
+				<a>ID: {{pet?.petId}}</a>
+			</div>
+		</div>
+	</div>
+</div>
