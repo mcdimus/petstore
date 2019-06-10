@@ -1,49 +1,36 @@
-<div class="ui modal" id="add-new-pet-dialog">
-	<i class="close icon"></i>
-	<div class="header">
-		Add New Pet
-	</div>
-	<div class="image content">
-		<div class="ui medium image">
-			<img src="{{petImageSrc}}">
-		</div>
-		<div class="description" style="width: 100%;">
-			<div class="ui header">Add a new pet to the store.</div>
-			<form class="ui large form" [formGroup]="addPetForm"
-				  [ngClass]="{'error': addPetForm.invalid && addPetForm.touched}">
-				<div class="ui segment">
-					<div class="required field">
-						<label>Name</label>
-						<div class="ui left icon input">
-							<i class="paw icon"></i>
-							<input type="text" name="name" formControlName="name" placeholder="Pet Name">
-						</div>
-					</div>
-					<div class="required field">
-						<label>Type</label>
-						<div class="ui input">
-							<ng-selectize style="width: 100%;" [placeholder]="'Pet Type'"
-										  [config]="petTypeDropdownConfig" [options]="petTypeDropdownOptions"
-										  [formControl]="addPetForm.get('petType')" (ngModelChange)="onPetTypeChange($event)"></ng-selectize>
-						</div>
-					</div>
-					<div class="required field">
-						<label>Birth Date</label>
-						<div class="ui calendar" id="birthDate">
-							<div class="ui left icon input">
-								<i class="calendar icon"></i>
-								<input type="text" name="birthDate" formControlName="birthDate" placeholder="Birth Date">
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-	<div class="actions">
-		<div class="ui positive right labeled icon button">
-			Add
-			<i class="checkmark icon"></i>
-		</div>
-	</div>
+<h2>Add New Pet</h2>
+<div class="container" style="padding-bottom: 1.5rem">
+  <div style="float: left; padding-right: 1.5rem">
+    <mat-card>
+      <form [formGroup]="addPetForm" [ngClass]="{'error': addPetForm.invalid && addPetForm.touched}">
+        <mat-form-field>
+          <input matInput id="name" type="text" name="name" formControlName="name" placeholder="Pet Name">
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="petType" (valueChange)="onPetTypeChange($event)">
+            <mat-option *ngFor="let type of petTypeDropdownOptions" [value]="type.value">
+              {{type.label}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+          <input matInput [matDatepicker]="dp" placeholder="Birth Date" formControlName="birthDate" />
+          <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+          <mat-datepicker #dp></mat-datepicker>
+        </mat-form-field>
+      </form>
+    </mat-card>
+  </div>
+  <div style="float: left">
+    <mat-card>
+      <div style="display: inline-block"><img src="{{petImageSrc}}" alt="Pet image"
+                                              style="width: 150px; height: 150px"/>
+      </div>
+    </mat-card>
+  </div>
+  <div class="clearfix"></div>
 </div>
+<button mat-raised-button color="primary" (click)="create()">Add</button>

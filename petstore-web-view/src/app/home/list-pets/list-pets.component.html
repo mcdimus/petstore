@@ -1,33 +1,46 @@
-<table class="ui compact selectable celled table">
-	<thead>
-	<tr>
-		<th>Name</th>
-		<th>Type</th>
-		<th>Birth Date</th>
-		<th style="text-align:center;">Action</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr *ngFor="let pet of pets" (click)="viewPetInfoClick(pet)">
-		<td>{{pet.name}}</td>
-		<td>{{pet.petType}}</td>
-		<td>{{pet.birthDate | date:'medium'}}</td>
-		<td style="text-align: center;"><i class="clickable ui trash icon" (click)="onPetRemoveClick($event, pet.petId)"></i></td>
-	</tr>
-	</tbody>
-	<tfoot class="full-width">
-		<tr>
-			<th colspan="4" style="padding: 6px 10px;">
-				<div class="ui left floated mini action input">
-					<input type="text" placeholder="Find Pet By ID..." [(ngModel)]="petSearchId">
-					<button class="ui icon button" (click)="onPetSearchByIdClick($event)">
-						<i class="search icon"></i>
-					</button>
-				</div>
-				<button class="ui right floated small primary labeled icon button" (click)="onPetAddTriggerClick()">
-					<i class="plus icon"></i> Add Pet
-				</button>
-			</th>
-		</tr>
-	</tfoot>
-</table>
+<mat-table [dataSource]="pets" class="mat-elevation-z8">
+  <ng-container matColumnDef="name" >
+    <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+    <mat-cell *matCellDef="let pet"> {{pet.name}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="type">
+    <mat-header-cell *matHeaderCellDef> Type</mat-header-cell>
+    <mat-cell *matCellDef="let pet"> {{pet.petType}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="birthdate">
+    <mat-header-cell *matHeaderCellDef> Birth Date</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.birthDate | date}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
+    <mat-cell *matCellDef="let pet">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onPetRemoveClick($event, pet.petId)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row clickable" (click)="open(row)"></mat-row>
+</mat-table>
+
+<button mat-fab color="primary" class="create-new-btn" (click)="onPetAddTriggerClick()"
+        matRipple [matRippleCentered]="true" [routerLink]="['add']">
+  <mat-icon>add</mat-icon>
+</button>
+
+<!--<div class="ui left floated mini action input">-->
+<!--  <mat-form-field class="example-form-field">-->
+<!--    <input matInput type="text" placeholder="Find Pet By ID..." [(ngModel)]="petSearchId"/>-->
+<!--    <button mat-button *ngIf="petSearchId" matSuffix mat-icon-button aria-label="Clear" (click)="petSearchId=''">-->
+<!--      <mat-icon>close</mat-icon>-->
+<!--    </button>-->
+<!--  </mat-form-field>-->
+<!--  <button mat-raised-button color="primary" (click)="onPetSearchByIdClick($event)">-->
+<!--    <mat-icon>search</mat-icon>-->
+<!--  </button>-->
+<!--</div>-->
+

@@ -1,25 +1,28 @@
-import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
-import {Pet} from "./app.types";
+import { Injectable } from '@angular/core';
+import { Pet } from './app.types';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AppRepositoryService {
 
-	constructor(private http:Http) {}
+  constructor(private http: HttpClient) {
+  }
 
-	getPets() {
-		return this.http.get("/pet/");
-	}
+  getPets(): Observable<Pet[]> {
+    return this.http.get<Pet[]>('/pet/');
+  }
 
-	removePet(petId:number) {
-		return this.http.delete(`/pet/${petId}`);
-	}
+  removePet(petId: number): Observable<any> {
+    return this.http.delete<any>(`/pet/${petId}`);
+  }
 
-	addPet(pet:Pet) {
-		return this.http.post('/pet/', pet);
-	}
+  addPet(pet: Pet) {
+    return this.http.post('/pet/', pet);
+  }
 
-	findPetById(petId:string) {
-		return this.http.get(`/pet/${petId}`)
-	}
+  findPetById(petId: string): Observable<Pet> {
+    return this.http.get<Pet>(`/pet/${petId}`);
+  }
+
 }

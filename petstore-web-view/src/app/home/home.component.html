@@ -1,9 +1,7 @@
-<list-pets [pets]="pets"
-	   (onPetRemove)="onPetRemove($event)"
-	   (onPetAddTrigger)="showPetAddModal()"
-	   (onPetSearch)="searchPet($event)"
-		   (onViewPetInfo)="onViewPetInfo($event)"></list-pets>
-
-<add-new-pet (onPetAdd)="onPetAdd($event)"></add-new-pet>
-
-<view-pet-info></view-pet-info>
+<h3>Pets in stock</h3>
+<app-list-pets
+  (onPetRemove)="onPetRemove($event)"
+  (onPetAddTrigger)="showPetAddModal()"
+  (onPetSearch)="searchPet($event)"
+  (onViewPetInfo)="onViewPetInfo($event)">
+</app-list-pets>

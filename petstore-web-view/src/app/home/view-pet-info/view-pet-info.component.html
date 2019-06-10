@@ -1,20 +1,13 @@
-<div class="ui small modal" id="view-pet-modal">
-	<i class="close icon"></i>
-	<div class="header">Pet Details</div>
-	<div class="content" style="width: 50%; margin: auto;">
-		<div class="ui card">
-			<div class="image">
-				<img src="{{petTypeImageSrc}}">
-			</div>
-			<div class="content">
-				<a class="header">{{pet?.name}}</a>
-				<div class="meta">
-					<span class="date">Born {{pet?.birthDate | date:'short'}}</span>
-				</div>
-			</div>
-			<div class="extra content">
-				<a>ID: {{pet?.petId}}</a>
-			</div>
-		</div>
-	</div>
-</div>
+<h2>Pet Info</h2>
+<mat-card class="example-card" style="max-width: 200px">
+  <mat-card-header>
+    <mat-card-title>{{pet?.name}}</mat-card-title>
+    <mat-card-subtitle>{{pet?.petType}}</mat-card-subtitle>
+  </mat-card-header>
+  <div style="display: inline-block"><img src="{{petTypeImageSrc}}" alt="Photo of a {{pet?.name}}"
+                                          style="width: 150px; height: 150px"/>
+  </div>
+  <mat-card-content>
+    <strong>Birthday: </strong> {{pet?.birthDate | date}}
+  </mat-card-content>
+</mat-card>

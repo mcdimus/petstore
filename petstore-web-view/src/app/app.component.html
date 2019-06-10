@@ -1,36 +1,6 @@
-<div>
-	<div class="ui fixed inverted menu">
-		<div class="ui container">
-			<a href="#" class="header item">
-				<img class="logo" src="assets/rbc-logo.png" style="margin-right: 15px;">
-				RBC Pet Store
-			</a>
-			<a routerLinkActive="active" routerLink="/" [routerLinkActiveOptions]="{ exact: true }" class="item">Home</a>
-		</div>
-	</div>
-
-	<div class="ui main text container" style="padding-top: 100px; padding-bottom: 40px;">
-		<div style="text-align: center; margin-bottom: 30px;">
-			<h1 class="ui header">RBC Pet Store</h1>
-		</div>
-		<router-outlet></router-outlet>
-	</div>
-
-	<div class="ui inverted vertical footer segment">
-		<div class="ui center aligned container">
-			<h4 class="ui inverted horizontal divider header">
-				<i class="github icon" style="margin-right: 0;"></i>
-			</h4>
-			<div style="width:100%; text-align: center;">
-				<a href="https://github.com/NicholasAzar">
-					<img src="assets/avatar.jpg" style="width:35px; height: 35px;">
-				</a>
-			</div>
-			<div class="ui horizontal inverted small divided link list">
-				<a class="item" href="https://github.com/NicholasAzar">Profile</a>
-				<a class="item" href="https://github.com/NicholasAzar?tab=repositories">Repositories</a>
-				<a class="item" href="mailto:contact@nicholasazar.com">Contact</a>
-			</div>
-		</div>
-	</div>
-</div>
+<mat-toolbar>
+  <span matBadge="&#946;" matBadgeOverlap="false" matBadgeSize="medium" style="display: inline-block;">Pet Store</span>
+  <a mat-button [routerLink]="['']" style="margin: 0 2rem">Home</a>
+</mat-toolbar>
+<hr/>
+<router-outlet></router-outlet>

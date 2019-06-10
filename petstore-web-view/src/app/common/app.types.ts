@@ -1,6 +1,6 @@
 export interface Pet {
-	petId:number;
-	name:string;
-	petType:string;
-	birthDate:number;
+  petId: number;
+  name: string;
+  petType: string;
+  birthDate: number;
 }
