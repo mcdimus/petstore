@@ -1,23 +1,26 @@
 <mat-table [dataSource]="pets" class="mat-elevation-z8">
   <ng-container matColumnDef="name" >
     <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
-    <mat-cell *matCellDef="let pet"> {{pet.name}} </mat-cell>
+    <mat-cell *matCellDef="let pet"> {{pet?.name}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="type">
     <mat-header-cell *matHeaderCellDef> Type</mat-header-cell>
-    <mat-cell *matCellDef="let pet"> {{pet.petType}} </mat-cell>
+    <mat-cell *matCellDef="let pet"> {{pet?.petType}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="birthdate">
     <mat-header-cell *matHeaderCellDef> Birth Date</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.birthDate | date}} </mat-cell>
+    <mat-cell *matCellDef="let element"> {{element?.birthDate | date}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="action">
     <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
     <mat-cell *matCellDef="let pet">
-      <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onPetRemoveClick($event, pet.petId)">
+      <button mat-button matSuffix mat-icon-button [routerLink]="['edit', pet?.petId]">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-button matSuffix mat-icon-button (click)="onPetRemoveClick($event, pet?.petId)">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>

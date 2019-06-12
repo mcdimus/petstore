@@ -6,8 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AppRepositoryService {
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getPets(): Observable<Pet[]> {
     return this.http.get<Pet[]>('/pet/');
@@ -17,8 +16,12 @@ export class AppRepositoryService {
     return this.http.delete<any>(`/pet/${petId}`);
   }
 
-  addPet(pet: Pet) {
-    return this.http.post('/pet/', pet);
+  addPet(pet: Pet): Observable<any> {
+    return this.http.post<any>('/pet/', pet);
+  }
+
+  updatePet(petId: number, pet: Pet): Observable<any> {
+    return this.http.put<any>(`/pet/${petId}`, pet);
   }
 
   findPetById(petId: string): Observable<Pet> {

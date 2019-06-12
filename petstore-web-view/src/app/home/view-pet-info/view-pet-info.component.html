@@ -1,5 +1,5 @@
 <h2>Pet Info</h2>
-<mat-card class="example-card" style="max-width: 200px">
+<mat-card class="example-card" style="max-width: 200px; margin-bottom: 1.5rem">
   <mat-card-header>
     <mat-card-title>{{pet?.name}}</mat-card-title>
     <mat-card-subtitle>{{pet?.petType}}</mat-card-subtitle>
@@ -11,3 +11,4 @@
     <strong>Birthday: </strong> {{pet?.birthDate | date}}
   </mat-card-content>
 </mat-card>
+<button mat-raised-button [routerLink]="['/edit', pet?.petId]">Edit</button>

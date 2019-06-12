@@ -1,0 +1,37 @@
+<h2>Edit Pet Info</h2>
+<div class="container" style="padding-bottom: 1.5rem">
+  <div style="float: left; padding-right: 1.5rem">
+    <mat-card>
+      <form [formGroup]="editPetForm" [ngClass]="{'error': editPetForm.invalid && editPetForm.touched}">
+        <mat-form-field>
+          <input matInput id="name" type="text" name="name" formControlName="name" placeholder="Pet Name">
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="petType" (valueChange)="onPetTypeChange($event)">
+            <mat-option *ngFor="let type of petTypeDropdownOptions" [value]="type.value">
+              {{type.label}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+          <input matInput [matDatepicker]="dp" placeholder="Birth Date" formControlName="birthDate" />
+          <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+          <mat-datepicker #dp></mat-datepicker>
+        </mat-form-field>
+      </form>
+    </mat-card>
+  </div>
+  <div style="float: left">
+    <mat-card>
+      <div style="display: inline-block"><img src="{{petImageSrc}}" alt="Pet image"
+                                              style="width: 150px; height: 150px"/>
+      </div>
+    </mat-card>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<button mat-raised-button color="primary" (click)="update()" style="margin-right: 1.5rem">Update</button>
+<button mat-raised-button (click)="cancel()">Cancel</button>

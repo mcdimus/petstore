@@ -31,4 +31,9 @@ public class PetService {
     public void deletePet(String petId) {
         this.petRepository.delete(petId);
     }
+
+    public void updatePet(Pet pet) {
+        this.petRepository.save(pet);
+    }
+
 }

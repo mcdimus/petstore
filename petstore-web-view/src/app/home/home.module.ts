@@ -9,22 +9,46 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatBadgeModule,
-  MatButtonModule, MatCardModule,
+  MatButtonModule,
+  MatCardModule,
   MatDatepickerModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
   MatNativeDateModule,
-  MatRippleModule, MatSelectModule,
+  MatRippleModule,
+  MatSelectModule,
   MatTableModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
+import { EditPetInfoComponent } from './edit-pet-info/edit-pet-info.component';
 
 @NgModule({
-  declarations: [HomeComponent, AddNewPetComponent, ListPetsComponent, ViewPetInfoComponent],
+  declarations: [
+    HomeComponent,
+    AddNewPetComponent,
+    ListPetsComponent,
+    ViewPetInfoComponent,
+    EditPetInfoComponent
+  ],
   imports: [
     CommonModule,
-    BrowserModule, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatTableModule, MatRippleModule, RouterModule, MatBadgeModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, MatCardModule
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatRippleModule,
+    RouterModule,
+    MatBadgeModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatCardModule
   ]
 })
 export class HomeModule {
