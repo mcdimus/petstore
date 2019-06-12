@@ -3,16 +3,5 @@
 Sample petstore application
 
 * spring-boot
-* angular (4)
+* angular (8)
 * mongodb
-
-## Build
-```
-mvn clean install
-```
-
-## Run
-```
-cd *web
-mvn spring-boot:run
-```

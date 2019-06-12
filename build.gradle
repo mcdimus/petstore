@@ -1,0 +1,107 @@
+buildscript {
+  ext {
+    springBootVersion = '2.0.5.RELEASE'
+  }
+  repositories {
+    mavenCentral()
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    classpath "com.moowork.gradle:gradle-node-plugin:1.2.0"
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: "com.moowork.node"
+
+group = 'ee.mcdimus.petstore'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+clean.doFirst {
+  delete "${rootDir}/ui/dist"
+  delete "${rootDir}/ui/node_modules"
+}
+
+node {
+  version = "10.12.0"
+  npmVersion = "6.4.1"
+  download = true
+  nodeModulesDir = file("${rootDir}/ui/")
+}
+
+task npmInstallQuiet(type: NpmTask) {
+  args = ["install", "--silent"]
+}
+task npmBuild(type: NpmTask, dependsOn: [npmInstallQuiet]) {
+  // install the express package only
+  args = ["run", "build:prod"]
+  workingDir = file("${rootDir}/ui/")
+}
+
+war {
+  enabled = true
+  baseName = 'petstore'
+  version = version
+  from "${rootDir}/ui/dist/petstore-ui"
+}
+
+task fatWar(dependsOn: [clean, npmBuild, war]) {}
+
+repositories {
+//  maven { url "http://repo.rmv/nexus/repository/maven-public/" }
+  mavenCentral()
+}
+
+dependencies {
+  implementation('org.springframework.boot:spring-boot-starter-actuator')
+  implementation('org.springframework.boot:spring-boot-starter-cache')
+  implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+  implementation('org.springframework.boot:spring-boot-starter-jersey')
+//	implementation('org.springframework.boot:spring-boot-starter-security')
+  implementation('org.springframework.boot:spring-boot-starter-validation')
+  implementation('org.springframework.boot:spring-boot-starter-web')
+  implementation('org.liquibase:liquibase-core')
+  implementation('org.springframework.retry:spring-retry')
+  implementation('org.springframework.session:spring-session-core')
+  runtimeOnly('org.springframework.boot:spring-boot-devtools')
+  runtimeOnly('org.postgresql:postgresql')
+  compileOnly 'org.projectlombok:lombok:1.18.8'
+  annotationProcessor 'org.projectlombok:lombok:1.18.8'
+  testImplementation('org.springframework.boot:spring-boot-starter-test')
+  testImplementation('org.springframework.restdocs:spring-restdocs-mockmvc')
+  testImplementation('org.springframework.security:spring-security-test')
+  implementation 'com.vladmihalcea:hibernate-types-52:2.4.3'
+  
+  compile 'com.google.guava:guava:26.0-jre'
+  compile 'ch.qos.logback:logback-classic:1.2.3'
+  compile 'org.apache.commons:commons-lang3:3.6'
+
+  compile 'io.springfox:springfox-swagger2:2.9.2'
+  compile 'io.springfox:springfox-swagger-ui:2.9.2'
+
+  testCompile('org.assertj:assertj-core:3.11.1')
+  testCompile('org.mockito:mockito-core:2.22.0')
+  testCompile('org.mockito:mockito-junit-jupiter:2.22.0')
+  testCompile('org.junit.jupiter:junit-jupiter-api:5.3.1')
+  testCompile('org.junit.jupiter:junit-jupiter-params:5.3.1')
+  testRuntime('org.junit.jupiter:junit-jupiter-engine:5.3.1')
+}
+
+test {
+  useJUnitPlatform()
+  testLogging {
+    events "passed", "skipped", "failed"
+  }
+}
+
+wrapper {
+  gradleVersion = "5.4.1"
+  distributionType = Wrapper.DistributionType.ALL
+}

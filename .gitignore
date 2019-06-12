@@ -25,6 +25,6 @@ nbdist/
 
 petstore-web/src/main/resouces/static
 /petstore-web/src/main/resources/static/
-/petstore-web-view/.idea/
-/petstore-web-view/dist/
-/petstore-web-view/node_modules/
+/ui/.idea/
+/ui/dist/
+/ui/node_modules/
